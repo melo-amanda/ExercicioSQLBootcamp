@@ -4,9 +4,12 @@ conexao = sqlite3.connect('BancoExercicio')
 cursor = conexao.cursor()
 
 cursor.execute('PRAGMA foreign_keys = ON')
+
+#Crie uma tabela chamada "alunos" com os seguintes campos: id (inteiro), nome (texto), idade (inteiro) e curso (texto)
 # cursor.execute('CREATE TABLE alunos(id INT, nome VARCHAR(100), idade INT, curso VARCHAR(100))')
 
-# cursor.execute('INSERT INTO alunos(id, nome, idade, curso) VALUES(1, "Amanda", 23, "Eng. de Producao")')
+#Insira pelo menos 5 registros de alunos na tabela que você criou no exercício anterior.
+#cursor.execute('INSERT INTO alunos(id, nome, idade, curso) VALUES(1, "Amanda", 23, "Eng. de Producao")')
 # cursor.execute('INSERT INTO alunos(id, nome, idade, curso) VALUES(2, "Nicholas", 29, "Eng. Mecânica")')
 # cursor.execute('INSERT INTO alunos(id, nome, idade, curso) VALUES(3, "Mateus", 24, "Eng. Mecânica")')
 # cursor.execute('INSERT INTO alunos(id, nome, idade, curso) VALUES(4, "Carol", 23, "Eng. de Produção")')
@@ -30,6 +33,7 @@ total = cursor.execute('SELECT COUNT(id) FROM alunos')
 #Remova um aluno pelo seu ID
 # cursor.execute('DELETE FROM alunos WHERE id=2')
 
+#Crie uma tabela chamada "clientes" com os campos: id (chave primária), nome (texto), idade (inteiro) e saldo (float). Insira alguns registros de clientes na tabela.
 # cursor.execute('CREATE TABLE clientes(id INT PRIMARY KEY, nome VARCHAR(100), idade INT, saldo FLOAT)')
 
 # cursor.execute('INSERT INTO clientes(id, nome, idade, saldo) VALUES(1, "Rogerio", 40, 4000)')
@@ -56,15 +60,14 @@ qtd_maior = cursor.execute('SELECT COUNT(id) FROM clientes WHERE saldo>1000')
 #Remova um cliente pelo seu ID.
 # cursor.execute('DELETE FROM clientes WHERE id=4')
 
-
+#Crie uma segunda tabela chamada "compras" com os campos: id (chave primária), cliente_id (chave estrangeira referenciando o id da tabela "clientes"), produto (texto) e valor (real). Insira algumas compras associadas a clientes existentes na tabela "clientes". Escreva uma consulta para exibir o nome do cliente, o produto e o valor de cada compra.
 # cursor.execute('CREATE TABLE compras(id INT PRIMARY KEY, cliente_id INT, produto VARCHAR(100), valor FLOAT, FOREIGN KEY(cliente_id) REFERENCES clientes(id))')
 # cursor.execute('INSERT INTO compras(id, cliente_id, produto, valor) VALUES(1, 3, "café", 10)')
 # cursor.execute('INSERT INTO compras(id, cliente_id, produto, valor) VALUES(2, 1, "frango", 40)')
 # cursor.execute('INSERT INTO compras(id, cliente_id, produto, valor) VALUES(3, 2, "chocolate", 3)')
 
 join = cursor.execute('SELECT nome, produto, valor FROM clientes INNER JOIN compras ON clientes.id = compras.cliente_id')
-for info in join:
-    print(info)
+
 conexao.commit()
 conexao.close()
 
